@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An advanced, stylish, and real-time calculator by Syed Ahmer Shah.">
+    <meta name="keywords" content="Advanced Calculator, JavaScript, HTML, CSS, Syed Ahmer Shah">
+    <meta name="author" content="Syed Ahmer Shah">
+    <title>Advanced Calculator - Syed Ahmer Shah</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e1e1e, #333);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: #fff;
+        }
+        .calculator {
+            width: 600px; 
+            background: #222;
+            padding: 30px; 
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(255, 165, 0, 0.5); 
+            text-align: center;
+        }
+        #display {
+            width: 100%;
+            height: 55px; 
+            font-size: 2.2em; 
+            text-align: right;
+            padding: 12px; 
+            border: none;
+            outline: none;
+            background: #444;
+            color: #fff;
+            border-radius: 5px;
+            margin-bottom: 15px; 
+        }
+        #live-result {
+            text-align: right;
+            font-size: 1.6em; 
+            color: #ff8c00;
+            min-height: 40px; 
+            margin-bottom: 15px; 
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px; 
+        }
+        button {
+            width: 100%;
+            height: 80px; 
+            font-size: 1.8em; 
+            border: none;
+            cursor: pointer;
+            border-radius: 8px; 
+            transition: 0.3s;
+            background: #666;
+            color: #fff;
+        }
+        .operator { background: #ff8c00; color: #fff; }
+        .equal { background: #ff8c00; color: #fff; }
+        .clear { background: #f44336; color: #fff; }
+        button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Advanced Calculator - Syed Ahmer Shah</h2>
+        <input type="text" id="display" disabled>
+        <div id="live-result">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="appendValue('/')">/</button>
+            <button onclick="appendValue('*')">*</button>
+            <button onclick="appendValue('-')">-</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('+')" class="operator">+</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button class="equal" onclick="calculateResult()">=</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('0')" style="grid-column: span 2;">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            if (/\d|[\+\-\*\/\.]/.test(key)) {
+                appendValue(key);
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Backspace') {
+                backspace();
+            }
+        });
+
+        function appendValue(value) {
+            let display = document.getElementById("display");
+            display.value += value;
+            updateLiveResult();
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+            document.getElementById("live-result").textContent = "0";
+        }
+
+        function calculateResult() {
+            try {
+                let result = eval(document.getElementById("display").value);
+                document.getElementById("display").value = result;
+                document.getElementById("live-result").textContent = result;
+            } catch {
+                document.getElementById("live-result").textContent = "Error";
+            }
+        }
+
+        function updateLiveResult() {
+            try {
+                let result = eval(document.getElementById("display").value);
+                document.getElementById("live-result").textContent = result;
+            } catch {
+                document.getElementById("live-result").textContent = "";
+            }
+        }
+    </script>
+</body>
+</html>
