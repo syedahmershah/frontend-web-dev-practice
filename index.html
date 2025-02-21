@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple Login Authentication System">
+    <meta name="author" content="Syed Ahmer Shah">
+    <title>Login Authentication</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        header {
+            background-color: #ff6347;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+        form {
+            padding: 30px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #ff6347;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+        button:hover {
+            background-color: #e5533b;
+        }
+        .link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .link a {
+            color: #ff6347;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        .secure-page {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+        }
+        .secure-page h2 {
+            font-size: 28px;
+            color: #ff6347;
+        }
+        .secure-page p {
+            font-size: 18px;
+            color: #fff;
+        }
+        .secure-page a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff6347;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .secure-page a:hover {
+            background-color: #e5533b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            Welcome, Syed Ahmer Shah
+        </header>
+
+        <!-- Login Form -->
+        <div id="login-form">
+            <form onsubmit="return login(event)">
+                <input type="text" id="username" placeholder="Username" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+                <div class="link">
+                    <a href="#" onclick="toggleRegister()">Don't have an account? Register</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="register-form" style="display: none;">
+            <form onsubmit="return register(event)">
+                <input type="text" id="reg-username" placeholder="Username" required />
+                <input type="password" id="reg-password" placeholder="Password" required />
+                <button type="submit">Register</button>
+                <div class="link">
+                    <a href="#" onclick="toggleLogin()">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Secured Page -->
+        <div id="secure-page" class="secure-page">
+            <h2>Welcome to the Secured Page</h2>
+            <p>You are successfully logged in!</p>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        
+        let users = [];
+
+        function toggleRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function toggleLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+
+        function register(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+
+            
+            if (users.some(user => user.username === username)) {
+                alert('Username already taken!');
+                return;
+            }
+
+            
+            users.push({ username, password });
+            alert('Registration successful!');
+            toggleLogin();
+        }
+
+        function login(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert('Login successful!');
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('register-form').style.display = 'none';
+                document.getElementById('secure-page').style.display = 'block';
+            } else {
+                alert('Invalid username or password!');
+            }
+        }
+
+        function logout() {
+            document.getElementById('secure-page').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
