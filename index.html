@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A stylish and professional to-do list web app created by Syed Ahmer Shah with a dark theme.">
+  <meta name="author" content="Syed Ahmer Shah">
+  <meta name="keywords" content="todo, tasks, to-do list, completed tasks, pending tasks, web app, productivity, dark theme">
+  <title>Syed Ahmer Shah's To-Do App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #181818;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #222;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff6347;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 1.75rem;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #ff6347;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    .task-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 2px solid #444;
+      border-radius: 5px;
+      outline: none;
+      background-color: #333;
+      color: #e0e0e0;
+    }
+
+    .task-input:focus {
+      border-color: #ff6347;
+    }
+
+    .task-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .task-button:hover {
+      background-color: #e5533c;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background-color: #333;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .task-item:hover {
+      background-color: #444;
+    }
+
+    .task-item.complete {
+      background-color: #444;
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+
+    .task-buttons button {
+      padding: 6px 12px;
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .task-buttons button:hover {
+      background-color: #e5533c;
+    }
+
+    .task-buttons button:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+      padding-top: 15px;
+      border-top: 1px solid #444;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    .task-empty {
+      text-align: center;
+      color: #888;
+      font-style: italic;
+      margin-top: 15px;
+    }
+
+    .task-list .task-item {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .task-button {
+        font-size: 16px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Syed Ahmer Shah's To-Do App</h1>
+
+    
+    <input id="taskInput" class="task-input" type="text" placeholder="Add a new task..." />
+    <button class="task-button" onclick="addTask()">Add Task</button>
+
+    
+    <h2>Pending Tasks</h2>
+    <ul id="pendingTasks" class="task-list">
+      <div class="task-empty" id="pendingEmptyMessage">No pending tasks yet!</div>
+    </ul>
+
+    
+    <h2>Completed Tasks</h2>
+    <ul id="completedTasks" class="task-list">
+      <div class="task-empty" id="completedEmptyMessage">No completed tasks yet!</div>
+    </ul>
+
+    
+    <button class="task-button" id="clearCompleted" onclick="clearCompletedTasks()">Clear Completed Tasks</button>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ by <strong>Syed Ahmer Shah</strong></p>
+  </footer>
+
+  <script>
+    const taskInput = document.getElementById('taskInput');
+    const pendingTasksList = document.getElementById('pendingTasks');
+    const completedTasksList = document.getElementById('completedTasks');
+    const pendingEmptyMessage = document.getElementById('pendingEmptyMessage');
+    const completedEmptyMessage = document.getElementById('completedEmptyMessage');
+    const clearCompletedButton = document.getElementById('clearCompleted');
+
+    let tasks = [];
+
+    
+    function addTask() {
+      const taskName = taskInput.value.trim();
+      if (taskName !== "") {
+        const task = {
+          name: taskName,
+          isCompleted: false,
+          addedTime: new Date().toLocaleString()
+        };
+        tasks.push(task);
+        taskInput.value = '';
+        renderTasks();
+      }
+    }
+
+    
+    function renderTasks() {
+      pendingTasksList.innerHTML = '';
+      completedTasksList.innerHTML = '';
+
+      let pendingCount = 0;
+      let completedCount = 0;
+
+      tasks.forEach((task, index) => {
+        const taskElement = document.createElement('li');
+        taskElement.classList.add('task-item');
+        
+        if (task.isCompleted) {
+          taskElement.classList.add('complete');
+          taskElement.innerHTML = `
+            <span>${task.name} (Completed at: ${task.addedTime})</span>
+            <div class="task-buttons">
+              <button onclick="editTask(${index})">Edit</button>
+              <button onclick="deleteTask(${index})">Delete</button>
+            </div>
+          `;
+          completedTasksList.appendChild(taskElement);
+          completedCount++;
+        } else {
+          taskElement.innerHTML = `
+            <span>${task.name} (Added at: ${task.addedTime})</span>
+            <div class="task-buttons">
+              <button onclick="markComplete(${index})">Complete</button>
+              <button onclick="editTask(${index})">Edit</button>
+              <button onclick="deleteTask(${index})">Delete</button>
+            </div>
+          `;
+          pendingTasksList.appendChild(taskElement);
+          pendingCount++;
+        }
+      });
+
+      
+      if (pendingCount === 0) {
+        pendingEmptyMessage.style.display = 'block';
+      } else {
+        pendingEmptyMessage.style.display = 'none';
+      }
+
+      if (completedCount === 0) {
+        completedEmptyMessage.style.display = 'block';
+      } else {
+        completedEmptyMessage.style.display = 'none';
+      }
+    }
+
+    
+    function markComplete(index) {
+      tasks[index].isCompleted = true;
+      tasks[index].addedTime = new Date().toLocaleString();
+      renderTasks();
+    }
+
+    
+    function editTask(index) {
+      const newTaskName = prompt("Edit your task", tasks[index].name);
+      if (newTaskName && newTaskName.trim() !== "") {
+        tasks[index].name = newTaskName.trim();
+        renderTasks();
+      }
+    }
+
+    
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    
+    function clearCompletedTasks() {
+      tasks = tasks.filter(task => !task.isCompleted);
+      renderTasks();
+    }
+  </script>
+
+</body>
+</html>
