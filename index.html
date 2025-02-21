@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmer Shah - Full Stack Developer</title>
+  <meta name="description" content="Professional portfolio of Syed Ahmer Shah - Full Stack Developer &amp; UI/UX Designer" />
+  <meta name="keywords" content="Web Developer, Full Stack Developer, UI/UX Designer, Pakistan, Portfolio" />
+  <meta name="author" content="Syed Ahmer Shah" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ahmer Shah - Full Stack Developer Portfolio" />
+  <meta property="og:description" content="Professional portfolio showcasing web development and design projects" />
+  <meta property="og:image" content="https://example.com/image.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ahmer Shah - Full Stack Developer Portfolio" />
+  <meta name="twitter:description" content="Professional portfolio showcasing web development and design projects" />
+  <meta name="twitter:image" content="https://example.com/image.jpg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #1a73e8;
+      --secondary-color: #1558b0;
+      --dark-color: #333333;
+      --light-color: #f7f7f7;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      line-height: 1.7;
+      color: var(--dark-color);
+      background-color: var(--light-color);
+      overflow-x: hidden;
+    }
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      transition: var(--transition);
+      object-fit: cover;
+      border: 2px solid var(--primary-color);
+    }
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    nav a {
+      color: var(--dark-color);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--primary-color);
+      transition: var(--transition);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark-color);
+      cursor: pointer;
+      z-index: 1001;
+    }
+    section {
+      padding: 8rem 2rem 4rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    h2 {
+      font-size: 2.75rem;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    #home {
+      background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+        url('https://source.unsplash.com/random/1920x1080?coding,tech') center/cover fixed;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    .profile-header-image {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid var(--primary-color);
+      margin-bottom: 2rem;
+      box-shadow: 0 0 30px rgba(26, 115, 232, 0.3);
+    }
+    .home-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .home-content p {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+      font-weight: 600;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(26, 115, 232, 0.3);
+    }
+    .resume-button {
+      background: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+    .resume-button:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+    }
+    .about-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 4rem;
+      align-items: center;
+    }
+    .profile-img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    .about-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+    .project-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      position: relative;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    .project-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .project-info {
+      padding: 1.75rem;
+    }
+    .project-info h3 {
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .skill-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary-color);
+    }
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+    .skill-icon {
+      font-size: 2.75rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    #contact {
+      background: var(--dark-color);
+      color: white;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    .contact-info {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      transition: var(--transition);
+    }
+    .contact-info:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .contact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 1.75rem;
+    }
+    input,
+    textarea {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      box-shadow: 0 0 15px rgba(26, 115, 232, 0.2);
+    }
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 1rem;
+      }
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      section {
+        padding: 6rem 1.5rem 3rem;
+      }
+      .cta-button,
+      .resume-button {
+        width: 100%;
+        justify-content: center;
+        margin: 0.5rem 0;
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 5px;
+      position: relative;
+      color: #333;
+    }
+    .modal-close {
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      cursor: pointer;
+    }
+    .modal-close:hover,
+    .modal-close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="Ahmer Shah" class="logo" />
+      <nav>
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section id="home">
+    <div class="section-container home-content">
+      <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="Ahmer Shah" class="profile-header-image" />
+      <h1>Hi, I'm Syed Ahmer Shah</h1>
+      <p>Full Stack Developer &amp; UI/UX Designer</p>
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+        <a href="#contact" class="cta-button">
+          <i class="fas fa-paper-plane"></i>
+          Get in Touch
+        </a>
+        <!-- Resume download with embedded PDF data URL for offline use -->
+        <a href="data:application/pdf;base64,JVBERi0xLjQKMSAwIG9iago8PC9UeXBlIC9DYXRhbG9nIC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlIC9QYWdlcyAvS2lkcyBbMyAwIFIgXQo+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL01lZGlhQm94IFswIDAgNjEyIDc5Ml0gL0NvbnRlbnRzIDQgMCBSCj4+CmVuZG9iagoKNCAwIG9iago8PC9MZW5ndGggNDQ+PgpzdHJlYW0KQlQKLy9GMTI0IFRmCjEwMCB3cmFwIFRkCihIZWxsbywgUERGLSEpIFRqCkVUClRFClBlbmQgc3RyZWFtCmVuZG9iagoKeHJlZgowIDUKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDk2IDAwMDAwIG4gCjAwMDAwMDAyNzIgMDAwMDAgbiAKMDAwMDAwMDM1NCAwMDAwMCBuIAowMDAwMDAwNTE2IDAwMDAwIG4gCjAwMDAwMDA2NjEgMDAwMDAgbiAKdHJhaWxlcgo8PC9TaXplIDUvUm9vdCAxIDAgUgovSW5mbyA1IDAgUgo+PgpzdGFydHhyZWYKODU5Cj4KJSVFT0YK" download class="cta-button resume-button">
+          <i class="fas fa-download"></i>
+          Download Resume
+        </a>
+      </div>
+    </div>
+  </section>
+  <section id="about">
+    <div class="section-container">
+      <h2>About Me</h2>
+      <div class="about-container">
+        <img src="https://hawramani.com/wp-content/uploads/2018/03/ahmar_name-300x234.png" alt="Ahmer Shah" class="profile-img" />
+        <div class="about-content">
+          <p>
+            I'm a passionate full-stack developer with 3+ years of experience in creating responsive websites and web applications. My expertise spans both front-end and back-end development, with a strong focus on user experience and clean code architecture.
+          </p>
+          <p>
+            I hold a Bachelor's degree in Software Engineering and have worked on various projects ranging from e-commerce platforms to enterprise solutions. My technical skills include JavaScript, React, Node.js, and Python, complemented by a strong foundation in UI/UX design principles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="projects">
+    <div class="section-container">
+      <h2>My Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://www.iwdagency.com/cdn/shop/articles/eCommerce_Platform_Pic_2000x.jpg?v=1698957713" alt="E-Commerce Platform" class="project-image" />
+          <div class="project-info">
+            <h3>E-Commerce Platform</h3>
+            <p>Full-stack e-commerce solution with React &amp; Node.js</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-ecommerce">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://dokodemo-kerja.com/blog/wp-content/uploads/2021/09/task-management.jpg" alt="Task Manager" class="project-image" />
+          <div class="project-info">
+            <h3>Task Management App</h3>
+            <p>AI-powered task manager with machine learning features</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-task">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://www.figma.com/community/resource/c1c02a0c-6325-4efc-837a-867839b09ee0/thumbnail" alt="UX Case Study" class="project-image" />
+          <div class="project-info">
+            <h3>Banking App Redesign</h3>
+            <p>Mobile banking UX case study and prototype</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-banking">View Case Study</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="skills">
+    <div class="section-container">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-html5 skill-icon"></i>
+          <h3>Frontend Development</h3>
+          <p>HTML5, CSS3, JavaScript, React</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-server skill-icon"></i>
+          <h3>Backend Development</h3>
+          <p>Node.js, Python, REST APIs, MongoDB</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-palette skill-icon"></i>
+          <h3>UI/UX Design</h3>
+          <p>Figma, Adobe XD, User Research, Prototyping</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 88%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="education">
+    <div class="section-container">
+      <h2>Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Hyderabad Institute for Technology and Management Sciences</h3>
+          <p>BS in Software Engineering • 2024 - 2028</p>
+          <p>Current GPA: 3.8/4.0</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Superior College of Science</h3>
+          <p>Intermediate in Computer Science • 2022 - 2024</p>
+          <p>Grade: A+</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact">
+    <div class="section-container">
+      <h2>Contact Me</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <i class="fas fa-map-marker-alt contact-icon"></i>
+          <h3>Location</h3>
+          <p>Hyderabad, Pakistan</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope contact-icon"></i>
+          <h3>Email</h3>
+          <p>ahmarshah170@gmail.com</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-phone contact-icon"></i>
+          <h3>Phone</h3>
+          <p>+92 331 4413874</p>
+        </div>
+      </div>
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="Name" required />
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <textarea rows="5" placeholder="Message" required></textarea>
+        </div>
+        <button type="submit" class="cta-button">Send Message</button>
+      </form>
+    </div>
+  </section>
+  <!-- Modals for project details -->
+  <div id="modal-ecommerce" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>E-Commerce Platform Details</h2>
+      <p>This project is a full-stack e-commerce solution built with React and Node.js. It features product listings, shopping cart functionality, secure checkout, and a responsive design optimized for all devices.</p>
+    </div>
+  </div>
+  <div id="modal-task" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>Task Management App Details</h2>
+      <p>This is an AI-powered task manager that integrates machine learning features to prioritize tasks and boost productivity. It offers intuitive design and efficient workflow management.</p>
+    </div>
+  </div>
+  <div id="modal-banking" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2>Banking App Redesign Case Study</h2>
+      <p>This case study showcases the redesign of a mobile banking app focusing on improved user experience, enhanced accessibility, and strengthened security measures. The project includes user research, prototyping, and iterative testing.</p>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('nav ul');
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+      });
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollBy({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          if (window.innerWidth <= 768) {
+            navMenu.classList.remove('active');
+          }
+        });
+      });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('fade-in');
+              }, 300);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+      });
+      document.querySelector('.contact-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        alert('Thank you for your message! I will respond shortly.');
+        e.target.reset();
+      });
+      // Modal functionality
+      document.querySelectorAll('.open-modal').forEach(button => {
+        button.addEventListener('click', function() {
+          const modalId = this.getAttribute('data-target');
+          document.getElementById(modalId).style.display = 'block';
+        });
+      });
+      document.querySelectorAll('.modal-close').forEach(span => {
+        span.addEventListener('click', function() {
+          this.closest('.modal').style.display = 'none';
+        });
+      });
+      window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+          e.target.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
