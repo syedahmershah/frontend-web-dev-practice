@@ -27,4 +27,4 @@ This repository is a testament to my commitment to continuous learning. Here’s
 1. **Clone the Repository**:  
    To get started, simply clone the repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/frontend-web-dev-practice.git
+   git clone https://github.com/syedahmershah/frontend-web-dev-practice.git
